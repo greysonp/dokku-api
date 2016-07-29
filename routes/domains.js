@@ -40,6 +40,7 @@ function add(req, res) {
 }
 
 function clear(req, res) {
+  ssh.execBinary('domains:clear ' + req.query.app, res);
 }
 
 function disable(req, res) {
