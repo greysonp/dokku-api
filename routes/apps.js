@@ -13,37 +13,15 @@ function get(req, res) {
 }
 
 function create(req, res) {
-  ssh.create().exec('apps:create ' + req.query.app, {
-      exit: function(code, stdout, stderr) {
-        res.send({
-          status: stderr ? 'error' : 'success',
-          message: stderr ? stderr : 'Done'
-        });
-      }
-  }).start();
+  ssh.execBinary('apps:create ' + req.query.app, res);
 }
 
 function destroy(req, res) {
-  ssh.create().exec('apps:destroy ' + req.query.app + ' --force', {
-      exit: function(code, stdout, stderr) {
-        console.log(stdout);
-        res.send({
-          status: stderr ? 'error' : 'success',
-          message: stderr ? stderr : 'Done'
-        });
-      }
-  }).start();
+  ssh.execBinary('apps:destroy ' + req.query.app + ' --force', res);
 }
 
 function rename(req, res) {
-  ssh.create().exec('apps:rename ' + req.query.old + ' ' + req.query.new, {
-      exit: function(code, stdout, stderr) {
-        res.send({
-          status: stderr ? 'error' : 'success',
-          message: stderr ? stderr : 'Done'
-        });
-      }
-  }).start();
+  ssh.execBinary('apps:rename ' + req.query.old + ' ' + req.query.new, res);
 }
 
 // Exports

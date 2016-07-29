@@ -4,5 +4,17 @@ function create() {
   return new SSH(require('../config'));
 }
 
+function execBinary(command, res) {
+  create().exec(command, {
+      exit: function(code, stdout, stderr) {
+        res.send({
+          status: stderr ? 'error' : 'success',
+          message: stderr ? stderr : 'Done'
+        });
+      }
+  }).start();
+}
+
 // Exports
 exports.create = create;
+exports.execBinary = execBinary;
