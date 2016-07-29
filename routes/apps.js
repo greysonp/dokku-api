@@ -24,11 +24,25 @@ function create(req, res) {
 }
 
 function destroy(req, res) {
-
+  ssh.create().exec('apps:destroy ' + req.query.app, {
+      exit: function(code, stdout, stderr) {
+        res.send({
+          status: stderr ? 'error' : 'success',
+          message: stderr ? stderr : 'Done'
+        });
+      }
+  }).start();
 }
 
 function rename(req, res) {
-
+  ssh.create().exec('apps:rename ' + req.query.old + ' ' + req.query.new, {
+      exit: function(code, stdout, stderr) {
+        res.send({
+          status: stderr ? 'error' : 'success',
+          message: stderr ? stderr : 'Done'
+        });
+      }
+  }).start();
 }
 
 // Exports
