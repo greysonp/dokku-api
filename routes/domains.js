@@ -56,7 +56,7 @@ function remove(req, res) {
 }
 
 function setGlobal(req, res) {
-
+  ssh.execBinary('domains:set-global ' + req.query.domain, res);
 }
 
 // Exports
