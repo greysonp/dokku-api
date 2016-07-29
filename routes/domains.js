@@ -44,9 +44,11 @@ function clear(req, res) {
 }
 
 function disable(req, res) {
+  ssh.execBinary('domains:disable ' + req.query.app + ' ' + req.query.domain, res);
 }
 
 function enable(req, res) {
+  ssh.execBinary('domains:enable ' + req.query.app, res);
 }
 
 function remove(req, res) {
