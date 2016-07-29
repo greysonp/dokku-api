@@ -9,7 +9,7 @@ function execBinary(command, res) {
       exit: function(code, stdout, stderr) {
         res.send({
           status: stderr ? 'error' : 'success',
-          message: stderr ? stderr : 'Done'
+          message: stderr ? stderr : 'done'
         });
       }
   }).start();

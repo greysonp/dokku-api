@@ -27,7 +27,7 @@ function get(req, res) {
           }
         }
         res.send({
-          status: 'Success',
+          status: 'success',
           global: global,
           app: app
         });
@@ -36,6 +36,7 @@ function get(req, res) {
 }
 
 function add(req, res) {
+  ssh.execBinary('domains:add ' + req.query.app + ' ' + req.query.domain, res);
 }
 
 function clear(req, res) {
@@ -48,9 +49,11 @@ function enable(req, res) {
 }
 
 function remove(req, res) {
+  ssh.execBinary('domains:remove ' + req.query.app + ' ' + req.query.domain, res);
 }
 
 function setGlobal(req, res) {
+
 }
 
 // Exports
