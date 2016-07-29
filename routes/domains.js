@@ -43,10 +43,12 @@ function clear(req, res) {
   ssh.execBinary('domains:clear ' + req.query.app, res);
 }
 
+// TODO: Make long-running
 function disable(req, res) {
   ssh.execBinary('domains:disable ' + req.query.app + ' ' + req.query.domain, res);
 }
 
+// TODO: Make long-running
 function enable(req, res) {
   ssh.execBinary('domains:enable ' + req.query.app, res);
 }
