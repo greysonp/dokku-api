@@ -1,8 +1,7 @@
-var SSH = require('simple-ssh');
+var ssh = require('../utils/ssh');
 
 function get(req, res) {
-  var ssh = new SSH(require('../config'));
-  ssh.exec('apps', {
+  ssh.create().exec('apps', {
       exit: function(code, stdout, stderr) {
         var apps = stdout.split('\n');
         apps = apps.slice(1, apps.length - 1);
@@ -13,20 +12,27 @@ function get(req, res) {
   }).start();
 }
 
-function getCreate(req, res) {
+function create(req, res) {
+  ssh.create().exec('apps:create ' + req.query.app, {
+      exit: function(code, stdout, stderr) {
+        res.send({
+          status: stderr ? 'error' : 'success',
+          message: stderr ? stderr : 'Done'
+        });
+      }
+  }).start();
+}
+
+function destroy(req, res) {
 
 }
 
-function getDestroy(req, res) {
-
-}
-
-function getRename(req, res) {
+function rename(req, res) {
 
 }
 
 // Exports
 exports.get = get;
-exports.getCreate = getCreate;
-exports.getDestroy = getDestroy;
-exports.getRename = getRename;
+exports.create = create;
+exports.destroy = destroy;
+exports.rename = rename;

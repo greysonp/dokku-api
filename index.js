@@ -9,9 +9,9 @@ var apps = require('./routes/apps');
 app.get('/api/v1/raw', raw.get);
 
 app.get('/api/v1/apps', apps.get);
-app.get('/api/v1/apps/create', apps.getCreate);
-app.get('/api/v1/apps/destroy', apps.getDestroy);
-app.get('/api/v1/apps/rename', apps.getRename);
+app.get('/api/v1/apps/create', apps.create);
+app.get('/api/v1/apps/destroy', apps.destroy);
+app.get('/api/v1/apps/rename', apps.rename);
 
 // Start server
 var port = process.env.PORT || 5000;
