@@ -24,8 +24,9 @@ function create(req, res) {
 }
 
 function destroy(req, res) {
-  ssh.create().exec('apps:destroy ' + req.query.app, {
+  ssh.create().exec('apps:destroy ' + req.query.app + ' --force', {
       exit: function(code, stdout, stderr) {
+        console.log(stdout);
         res.send({
           status: stderr ? 'error' : 'success',
           message: stderr ? stderr : 'Done'
