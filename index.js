@@ -3,11 +3,14 @@ var app = require('express')();
 var http = require('http').Server(app);
 
 var raw = require('./routes/raw');
+var pending = require('./routes/pending');
 var apps = require('./routes/apps');
 var domains = require('./routes/domains');
 
 // Routes
 app.get('/api/v1/raw', raw.get);
+
+app.get('/api/v1/pending/:id', pending.get);
 
 app.get('/api/v1/apps', apps.get);
 app.get('/api/v1/apps/create', apps.create);

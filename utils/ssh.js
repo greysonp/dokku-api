@@ -1,4 +1,5 @@
 var SSH = require('simple-ssh');
+var jobs = require('./jobs');
 
 function create() {
   return new SSH(require('../config'));
@@ -15,6 +16,26 @@ function execBinary(command, res) {
   }).start();
 }
 
+function execBinaryLong(command, req, res) {
+  var job = null;
+  create().exec(command, {
+      out: function(stdout) {
+        if (!job) {
+          job = jobs.create(req);
+          res.status(202).send(job);
+        }
+      },
+      exit: function(code, stdout, stderr) {
+        jobs.update(job.id, {
+          status: stderr ? 'error' : 'success',
+          message: stderr ? stderr : 'done',
+          endTime: Date.now()
+        });
+      }
+  }).start();
+}
+
 // Exports
 exports.create = create;
 exports.execBinary = execBinary;
+exports.execBinaryLong = execBinaryLong;
