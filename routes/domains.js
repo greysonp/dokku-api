@@ -5,7 +5,7 @@ function get(req, res) {
       exit: function(code, stdout, stderr) {
         if (stderr) {
           return res.send({
-            status: 'Error',
+            status: 'error',
             message: stderr
           });
         }
