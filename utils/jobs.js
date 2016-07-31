@@ -2,10 +2,11 @@ var count = 1;
 var jobs = {};
 var MAX_AGE = 24 * 60 * 60 * 1000; // 24 hrs
 
-function create(req) {
+function create(req, command) {
   var id = count++;
   var response = {
     status: 'pending',
+    command: command,
     id: id,
     location: req.protocol + '://' + req.get('host') + '/api/v1/pending/' + id,
     startTime: Date.now()

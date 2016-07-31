@@ -21,7 +21,7 @@ function execBinaryLong(command, req, res) {
   create().exec(command, {
       out: function(stdout) {
         if (!job) {
-          job = jobs.create(req);
+          job = jobs.create(req, command);
           res.status(202).send(job);
         }
       },
@@ -29,6 +29,7 @@ function execBinaryLong(command, req, res) {
         jobs.update(job.id, {
           status: stderr ? 'error' : 'success',
           message: stderr ? stderr : 'done',
+          command: command,
           endTime: Date.now()
         });
       }
