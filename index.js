@@ -6,6 +6,7 @@ var raw = require('./routes/raw');
 var pending = require('./routes/pending');
 var apps = require('./routes/apps');
 var domains = require('./routes/domains');
+var ps = require('./routes/ps');
 
 // Routes
 app.get('/api/v1/raw', raw.get);
@@ -24,6 +25,16 @@ app.get('/api/v1/domains/disable', domains.disable);
 app.get('/api/v1/domains/enable', domains.enable);
 app.get('/api/v1/domains/remove', domains.remove);
 app.get('/api/v1/domains/set-global', domains.setGlobal);
+
+app.get('/api/v1/ps', ps.get);
+app.get('/api/v1/ps/rebuildall', ps.rebuildall);
+app.get('/api/v1/ps/rebuild', ps.rebuild);
+app.get('/api/v1/ps/restartall', ps.restartall);
+app.get('/api/v1/ps/restart', ps.restart);
+app.get('/api/v1/ps/restore', ps.restore);
+app.get('/api/v1/ps/scale', ps.scale);
+app.get('/api/v1/ps/start', ps.start);
+app.get('/api/v1/ps/stop', ps.stop);
 
 // Start server
 var port = process.env.PORT || 5000;
