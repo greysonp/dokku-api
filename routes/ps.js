@@ -9,7 +9,7 @@ function rebuildall(req, res) {
 }
 
 function rebuild(req, res) {
-
+  ssh.execBinaryLong('ps:rebuild ' + req.query.app, req, res);
 }
 
 function restartall(req, res) {
