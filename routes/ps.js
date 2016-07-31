@@ -29,11 +29,11 @@ function scale(req, res) {
 }
 
 function start(req, res) {
-
+  ssh.execBinaryLong('ps:start ' + req.query.app, req, res);
 }
 
 function stop(req, res) {
-
+  ssh.execBinaryLong('ps:stop ' + req.query.app, req, res);
 }
 
 // Exports
